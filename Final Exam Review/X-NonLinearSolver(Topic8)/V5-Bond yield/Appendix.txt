@@ -1,0 +1,26 @@
+To calculate the bond yield, the structure is as follows:
+
+<Function02.h / . cpp>
+// virtual class
+class Function 
+    public:
+        virtual double Value(double x) = 0;
+        virtual double Derive(double x) = 0;
+
+<Bond.h / .cpp>
+// class Bond is a derived class of Function
+class Bond: public Function 
+    private:
+        double F, double T, vector<double> C, vector<double> T
+    public:
+        double Value(double y);
+        double Deriv(double y);
+
+<NonlinearSolver02.h / .cpp>
+class NonlinearSolver
+    private:
+        double Tgt, LEnd, REnd, Acc, Guess
+    public:
+        double SolveByBisect(Function *Fct)
+        double SolveByNR(Function *Fct)
+

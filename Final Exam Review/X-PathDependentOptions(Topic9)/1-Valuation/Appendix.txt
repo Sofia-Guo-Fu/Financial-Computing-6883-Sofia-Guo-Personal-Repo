@@ -1,0 +1,42 @@
+To evaluation path dependent options using Monte Carlo Method
+
+(1) MCModel.h/.cpp
+
+typedef vector<double> MCModel 
+ class MCModel
+    private: double S0, r, sigma
+    public:
+        GenenrateSamplePath(double T, int m, SamplePath &S) const; 
+        // Getter functions
+        double GetS0()
+        double GetR()
+        double GetSigma()
+        void SetS0(double S0_)
+        void SetR(double r_)
+        void SetSigma(double sigma_)
+        
+(2) class PathDepOption
+    protected: 
+        double Price, int m, double K, double T
+    public:
+        virtual double Payoff(const SamplePath &S) const=0
+        double PriceByMC(const MCModel &Model, long N); 
+        // Getter functions
+        double GetT();
+        double GetPrice()
+
+  class ArthmAsianCall: public PathDepOption
+  public:
+    double Payoff(const SamplePath &S) const; 
+    
+(3) Main.cpp
+    First, initialize S0,r, sigma
+    Then we can create an object of MCModel:
+        MCModel Model(S0,r,sigma)
+        
+    Next, initialize T,K,m
+    Then we can create an object of ArthmAsianCall
+        ArthmAsianCall Option(T,K,m)
+    
+    Finally, declare N and then call PriceByMC
+        Option.PriceByMC(Model,N)

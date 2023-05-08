@@ -1,0 +1,12 @@
+* Difference between virtual functions and pure virtual functions:
+
+A virtual function is a function declared in a base class that can be overridden in a derived class. When a derived class overrides a virtual function, 
+it provides its own implementation of the function that is called instead of the base class's implementation when the function is called on an object of the derived class.
+
+A pure virtual function is a virtual function that is declared in a base class but has no implementation. 
+A class that contains a pure virtual function is called an abstract class,and it cannot be instantiated. 
+Instead, it is meant to be derived from, and any derived class must provide an implementation for the pure virtual function. 
+If a derived class does not provide an implementation for a pure virtual function, then it is also an abstract class and cannot be instantiated.
+
+In summary, the main difference between virtual functions and pure virtual functions is that virtual functions have an implementation in the base class, 
+but can be overridden in a derived class, while pure virtual functions have no implementation in the base class and must be overridden in any derived class.

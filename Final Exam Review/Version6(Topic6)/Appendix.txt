@@ -1,0 +1,7 @@
+Version6 is different from version5 in that it now can price both European and American Options
+* The base abstract class is: Option 
+* And in the OptionCalculation class, apart from PriceByCRR function, 
+a "double PriceBySnell(const BinomialTreeModel &Model)" function is also added 
+* The price array is initialized via STL vector container. 
+    #include <vector>
+    vector<double>Price(N+1); 

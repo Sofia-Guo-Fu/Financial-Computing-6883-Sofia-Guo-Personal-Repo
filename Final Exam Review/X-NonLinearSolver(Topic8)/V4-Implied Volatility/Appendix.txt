@@ -1,0 +1,32 @@
+This Nonlinear Solver for Implied Volatility has the following structure:
+    4 classes: class Function, class EurCall, class Intermediary, class NonlinearSolver
+
+<Function .h/ .cpp>
+class Function:
+    virtual double Value(double x)=0;
+    virtual double Deriv(double x)=0; 
+
+<EurCall.h / .cpp>
+(1) class EurCall 
+    private: double T, K
+    public: 
+        double d_plus(double S0, double sigma, double r)
+        double d_minus(double S0, double sigma, double r)
+        double PriceByBSFormula(double S0, double sigma, double r)
+        double VegaByBSFormula(double S0, double sigma, double r)
+
+(2) class Intermediary: public EurCall, public Function // multiple inheritence
+    private: double S0, r; 
+    public:
+        double Value(double sigma) {return PriceByBSFormula(S0,sigma, r);}
+        double Deriv(double sigma) {return VegaByBSFormula(S0, sigma, r);}
+
+<NonlinearSolver.h/.cpp>
+
+class NonlinearSolver
+    private:
+        double Tgt, LEnd, REnd, Acc, Guess
+    public:
+        double SolveByBisect(Function *Fct)
+        double SolveByNR(Function *Fct)
+

@@ -1,0 +1,29 @@
+This is version 2 of European option pricing, which adds in the function pointers, 
+and extends the Payoff function from just CallPayoff() to PutPayoff(), and even DigitalCallPayoff() and DigitalPutPayoff() in HW2 
+
+It has the following files:
+
+* BinomialTreeModel.h/.cpp --  the same as in version 1
+    double RiskNeutProb(double U, double D, double R) {return (R-D)/(U-D); }
+    double CalculateAssetPrice(double S0, double U, double D, int n, int i)
+        {
+            return S0 * pow(U,,i) * pow(D,n-i); 
+        }
+    int GetInputData(double &S0, double &U, double &D, double &R)
+    
+* Option02.h, Option 02.cpp -- adds function pointers
+    int GetInputData(int &N, double &K); 
+    
+    double PriceByCRR(double S0, double U, double D, doulble R, int N, double K, double (*Payoff)(double z, double K))
+    //这里st 创新了一下, .cpp file 里这个函数返回的类型是指针类型
+    double *PriceByCRR(double S0, double U, double D, double R, int N, double K, double (*Payoff)(double z, double K))
+    
+    // and a variety of Payoff functions of different European options
+    double CallPayoff(double z, double K)
+    double PutPayoff(double z, double K)
+    double DigitalCallPayoff(double z, double K)
+    double DigitalPutPayoff(double z, double K)
+    
+    
+
+    

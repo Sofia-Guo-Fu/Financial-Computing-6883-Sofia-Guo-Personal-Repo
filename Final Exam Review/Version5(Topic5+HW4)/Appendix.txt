@@ -1,0 +1,81 @@
+This version5 differs from version4 in that, it adds in inheritance and polymorphism 
+so it has all the functionalities: abstract base class, virtual double Payoff function, function override, 
+                                    base class pointer associate with derived class object's address
+
+It has the following structure:
+
+*BinomialTreeModel02.h/.cpp(the same starting from version3):
+
+class BinomialTreeModel: 
+    private data members: double S0,U,D,R
+    public member functions:
+        double RiskNeutProb();
+        double CalculateAssetPrice(int n, int i) const; 
+        void UpdateBinomialTreeModel(double S0_, double U_, double D_, double R_)
+        int GetInputData(); 
+        And four get functions to access private data memebrs:
+        double GetR() const; double GetS0() const; double GetU() const; double GetD() const;
+        
+---------------------------------------------------------------------------------------------------
+* Option05.h/.cpp
+
+Now we have an abstract class:
+class EurOption:
+    protected: int N; 
+    private: default and copy constructor 
+    public: constructor with parameters
+            int GetN() const;
+            virtual double Payoff(double z) const = 0; // virtual function 
+            
+Later, the class Call, Put (and even Bull Spread, and bear Spread, all inherits from class EurOption) 
+
+class Call: public EurOption
+    private data: double K 
+    public memeber function: 
+        double Payoff(double z) const; // function override 
+        
+
+class Put: public EurOption
+    private data: double K 
+    public memeber function: 
+        double Payoff(double z) const; // function override 
+        
+
+class BullSpread: public EurOption
+    private data: double K1,K2 //that's why we put striking price as added data memebers for child class 
+    public memeber function: 
+        double Payoff(double z) const; // function override 
+
+class BearSpread: public EurOption
+    private data: double K1,K2 //that's why we put striking price as added data memebers for child class 
+    public memeber function: 
+        double Payoff(double z) const; // function override 
+
+
+// Then we also have a class of OptionCalculation
+
+class OptionCalculation:
+    private data: EurOption *pOption; // now, this is the base class pointer!!! 
+    
+    member function: 
+        double PriceByCRR(const BinomialTreeModel &Model) 
+        
+-------------------------------------------------------------------------------------------------------   
+* OptionCalculation04.cpp
+
+(1) Intialize all the variables
+(2) create an object of BinomialTreeModel: BinomialTreeModel Model(S0,U,D,R); 
+
+(3) Create call obejct of Call class:
+    Call call(N,K);  // now this is not dynamic memory allocation like that in version4, just object creation 
+    
+(4) Create object of class OptionCalculation:
+    OptionCalculation callCalculation(&call) // equivalent to: EurOption *pOption = &call 
+                                             // base class pointer associated with derived class object's address  
+    
+(5) cout<<<callOptionCalculation.PriceByCRR(Model)
+
+for Put, BullSpread, BearSpread, the logic is the same!!
+
+---------------------------------------------------------------------------
+Until now, we have our basic structure for pricing European Options!!! 

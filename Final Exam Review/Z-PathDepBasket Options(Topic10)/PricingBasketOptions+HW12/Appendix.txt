@@ -1,0 +1,38 @@
+(1) Matrix.h/.cpp --operator overload
+typedef vector<double> Vector
+typedef vector<Vector> Matrix
+
+Vector operator* (const Matrix &C, const Vector &V)
+Vector operator * (const double &a, const Vector &V)
+Vector operator * (const Vector &V, const Vector &W)
+
+Vector operator + (const double &a, const Vetcor &V)
+Vector operator + (const Vector &V, const Vector &W)
+
+Vector exp(const Vector &V)
+
+double operator ^ (const Vector &V, const Vector &W)
+
+ostream operator << (ostream &out, Vector &V)
+ostream operator << (ostream & out, Matrix &W)
+
+(2) PathDepOption.h/.cpp
+ class PathDepOption
+    private:
+        Vector S0, sigma;
+        Matrix C;
+        double r; 
+    public:
+        void GenerateSamplePath(double T, int m, SamplePath &S);
+        // getter functions
+        Vector GetS0() const; 
+        Vector GetSigma() const;
+        Matrix GetC() const;
+        double GetR() const;
+        // setter functions
+        void SetS0(const Vector &S0_)
+        void SetSigma(const Vector &sigma_)
+        void SetC(const Matrix &C_)
+        void SetR(double r_)
+        
+class ArthmAisanCall
