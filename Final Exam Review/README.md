@@ -1,5 +1,8 @@
 A quick review of Financial Computing class
 
+This folder "Final Exam Review" is a quick walk through of professor Song Tang's topics in the Financial Computing class of Spring 2023 semester.
+
+I summarized 8 different versions of Option Pricing methods seen in his PPT:
 ------------------------------------------------------------------------------------------------------------------------------------------
 * Version 1 is the simplest version of European call option pricing. 
 * Version 2 added "function pointers" to compute different payoff functions
@@ -10,4 +13,6 @@ A quick review of Financial Computing class
 * Version 7 creates a new class called "BinLattice" to display the prices of American options at each node
 * Version 8 incorporates function templates to show both the PriceTree and StoppingTree of American Options.
 ---------------------------------------------------------------------------------------------------------------------------------------------
-This only serves as reference for course study only, no additional commercial use is allowed. 
+
+
+
